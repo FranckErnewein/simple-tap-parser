@@ -26,6 +26,27 @@ var suite = {
     'not ok - ': '',
     'not ok': '',
     '#ok': '',
+  },
+
+  isSizeLine: {
+    'not valid': false,
+    '1..45': true,
+    '1..5': true,
+    '1..': false,
+    '8..9': false,
+    '1..0': false,
+    '1..010': true,
+    '1..3000': true,
+    '1.3000': false,
+  },
+
+  getSize: {
+    'not valid': -1,
+    '1..4': 4,
+    '1..42': 42,
+    '..42': -1,
+    '1..042': 42,
+    '1..0': -1,
   }
 
 };
