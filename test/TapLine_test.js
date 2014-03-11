@@ -1,8 +1,50 @@
-var tap = require('../tap');
+var tap = require('../tap'),
+    _ = require('lodash');
 
-exports.testSomething = function(test){
-  test.expect(1);
-  test.ok(true, "this assertion should pass");
-  test.done();
+var suite = {
+
+  isOk: {
+    'ok 1 - Something tested': true,
+    'not ok 1 - Something tested': false,
+  },
+
+  isNotOk: {
+    'ok 1 - Something tested': false,
+    'not ok 1 - Something tested': true,
+  },
+
+  isComment: {
+    '# a comment line': true,
+    '#an other comment line': true,
+    'not a comment line': false,
+    'not a #comment line': false,
+  },
+
+  getLabel: {
+    'ok - label is here': 'label is here',
+    'not ok - label is here': 'label is here',
+    'not ok - ': '',
+    'not ok': '',
+    '#ok': '',
+  }
+
 };
+
+module.exports.line = {};
+
+_.each( suite, function( tests, method ){
+
+  module.exports.line[ method ] = function( test ){
+    _.each( tests, function( result, input ){
+      var line = new tap.Line( input ); 
+      test.equals( line[ method ](), result ); 
+    });
+    test.done();
+  };
+
+});
+
+
+
+
 

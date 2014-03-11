@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.3",
-    "grunt-contrib-nodeunit": "~0.3.2"
+    "grunt-contrib-nodeunit": "~0.3.2",
+    "lodash": "~2.4.1"
   }
 }
