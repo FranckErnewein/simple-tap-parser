@@ -19,14 +19,14 @@
    }
  })(this, function (exports) {
 
-  function Line( string, index ){
+  function Line( string ) {
     this.string = string || ''; 
-    this.index = index;
+    this.details = '';
   }
 
   Line.prototype = {
     getLabel: function( line ) {
-      if( this.isComment() ){
+      if( this.isComment() ) {
         return '';
       }else{
         return this.string.split( ' - ' )[1] || '';
@@ -49,12 +49,24 @@
     },
     isTest: function(){
       return this.isOk() || this.isNotOk();
-    } 
+    },
+    isDetail: function(){
+      var firstChar = this.string.charAt( 0 );  
+      return firstChar == '\t' || firstChar == ' ';
+    },
+    addDetail: function( line ) {
+      this.details += line.string + '\n';
+    },
+    getDetails: function(){
+      return this.details;
+    }
+
 
   };
 
   function Parser( string ) {
     this.tests = [];
+    this.lines = [];
     this.validTest = 0;
     this.failedTest = 0;
     if( string ) this.parse( string );
@@ -69,22 +81,31 @@
     },
     addLine: function( string, index ){
       var line = new Line( string, index );
+      this.lines.push( line );
       if( line.isTest() ){
         this.tests.push( line );
         if( line.isOk() ) this.validTest++;
         else if( line.isNotOk() ) this.failedTest++;
+      }else if( line.isDetail() ){
+        this.getLastTestLine().addDetail( line );
       }
     },
-    getFailedTests: function(){
+    getFailedTests: function() {
       return this.failedTest;
     },
-    getValidTests: function(){
+    getValidTests: function() {
       return this.validTest;
     },
     getTest: function( index ){
       return this.tests[ index - 1 ];
     },
-    getTotal: function(){
+    getLastTestLine: function(){
+      return this.tests[ this.tests.length - 1 ];
+    },
+    getLine: function( index ) {
+      return this.lines[ index ];
+    },
+    getTotal: function() {
       return this.tests.length;
     }
 
