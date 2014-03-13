@@ -28,20 +28,17 @@
         return this.string.split( ' - ' )[1] || '';
       }
     },
-    getInteger: function() {
-      return this.string.replace( /^\D+/g, '');
-    },
     isComment: function() {
       return this.string.charAt(0) === '#';
     },
-    hasContent: function( indexStart, indexEnd, content ) {
-      return this.string.slice( indexStart, indexEnd ) === content;
+    beginWith: function( content ) {
+      return this.string.slice( 0, content.length ) === content;
     },
     isOk: function() {
-      return this.hasContent( 0, 2, 'ok' );
+      return this.beginWith( 'ok' );
     },
     isNotOk: function() {
-      return this.hasContent( 0, 6, 'not ok' );
+      return this.beginWith( 'not ok' );
     },
     isTest: function(){
       return this.isOk() || this.isNotOk();
