@@ -1,0 +1,24 @@
+{
+  "name": "tap-parser",
+  "version": "0.0.0",
+  "homepage": "https://github.com/FranckErnewein/tap-parser",
+  "authors": [
+    "Franck Ernewein <franck.ernewein@gmail.com>"
+  ],
+  "description": "Javascript tap file parser",
+  "main": "tap.js",
+  "keywords": [
+    "tap",
+    "test",
+    "unit",
+    "parser"
+  ],
+  "license": "GPLv2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
