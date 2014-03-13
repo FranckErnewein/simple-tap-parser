@@ -4,7 +4,7 @@ A javascript tap file parser
 
 ## Usage
 
-get the content of your `file.tap`
+get the content of your `test-result.tap` file
 ```tap
 1..4
 ok 1 - Input file opened
@@ -36,4 +36,4 @@ parser.getTest(3).getDetails(); // => arbitrary number of (...) beginning of lin
 
 tap-parser is released under the GPL v2.
 
-Copyright (c) 2014 Franck Ernewein, See [LICENSE] for details.
+Copyright (c) 2014 Franck Ernewein, See LICENSE for details.
