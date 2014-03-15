@@ -13,48 +13,52 @@
     factory((root.tap = {}));
   }
 
- }( this, function (exports) {
+ }( this, function ( exports ) {
+  
+  'use strict';
+  
+  var OK = 'ok';
+  var NOT_OK = 'not ok';
+  var SEPARATOR = ' - ';
 
   function Line( string ) {
     this.string = string || ''; 
-    this.details = '';
   }
 
   Line.prototype = {
-    getLabel: function( line ) {
-      if( this.isComment() ) {
-        return '';
-      }else{
-        return this.string.split( ' - ' )[1] || '';
-      }
-    },
     isComment: function() {
       return this.string.charAt(0) === '#';
     },
     beginWith: function( content ) {
       return this.string.slice( 0, content.length ) === content;
     },
-    isOk: function() {
-      return this.beginWith( 'ok' );
-    },
-    isNotOk: function() {
-      return this.beginWith( 'not ok' );
-    },
     isTest: function(){
-      return this.isOk() || this.isNotOk();
+      return this.beginWith( OK ) || this.beginWith( NOT_OK );
     },
     isDetail: function(){
       var firstChar = this.string.charAt( 0 );  
       return firstChar == '\t' || firstChar == ' ';
+    },
+  };
+
+  function Test( line ) {
+    this.line = line;
+    this.details = '';
+  }
+
+  Test.prototype = {
+    isValid: function(){
+      return this.line.beginWith( 'ok' );
     },
     addDetail: function( line ) {
       this.details += line.string + '\n';
     },
     getDetails: function(){
       return this.details;
+    },
+    getLabel: function(){
+      return this.line.string.split( SEPARATOR )[1] || '';
     }
-
-
   };
 
   function Parser( string ) {
@@ -76,29 +80,29 @@
       var line = new Line( string, index );
       this.lines.push( line );
       if( line.isTest() ){
-        this.tests.push( line );
-        if( line.isOk() ) this.validTest++;
-        else if( line.isNotOk() ) this.failedTest++;
+        var test = new Test( line );
+        this.tests.push( test );
+        this[ test.isValid() ? 'validTest' : 'failedTest' ]++; 
       }else if( line.isDetail() ){
-        this.getLastTestLine().addDetail( line );
+        this.getLastTest().addDetail( line );
       }
     },
-    getFailedTests: function() {
+    getFailedCount: function() {
       return this.failedTest;
     },
-    getValidTests: function() {
+    getValidCount: function() {
       return this.validTest;
     },
     getTest: function( index ){
       return this.tests[ index - 1 ];
     },
-    getLastTestLine: function(){
+    getLastTest: function(){
       return this.tests[ this.tests.length - 1 ];
     },
     getLine: function( index ) {
       return this.lines[ index ];
     },
-    getTotal: function() {
+    getTestCount: function() {
       return this.tests.length;
     }
 
@@ -106,6 +110,7 @@
 
 
    exports.Line = Line;
+   exports.Test = Test;
    exports.Parser = Parser;
 
    return exports;

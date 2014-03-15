@@ -16,9 +16,9 @@ var details2 = '' +
 '  arbitrary number of lines for any output\n';
 
 module.exports.parser = function( test ) {
-  test.equals( parser.getTotal(), 5 );
-  test.equals( parser.getValidTests(), 2 );
-  test.equals( parser.getFailedTests(), 3 );
+  test.equals( parser.getTestCount(), 5 );
+  test.equals( parser.getValidCount(), 2 );
+  test.equals( parser.getFailedCount(), 3 );
   test.equals( parser.getTest( 2 ).getLabel(), 'First line of the input valid.' );
   test.equals( parser.getTest( 4 ).getLabel(), 'Summarized correctly # TODO Not written yet' );
   test.equals( parser.getTest( 2 ).getDetails(), details );

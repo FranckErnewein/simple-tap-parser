@@ -3,29 +3,12 @@ var tap = require('../tap'),
 
 var suite = {
 
-  isOk: {
-    'ok 1 - Something tested': true,
-    'not ok 1 - Something tested': false,
-  },
-
-  isNotOk: {
-    'ok 1 - Something tested': false,
-    'not ok 1 - Something tested': true,
-  },
 
   isComment: {
     '# a comment line': true,
     '#an other comment line': true,
     'not a comment line': false,
     'not a #comment line': false,
-  },
-
-  getLabel: {
-    'ok - label is here': 'label is here',
-    'not ok - label is here': 'label is here',
-    'not ok - ': '',
-    'not ok': '',
-    '#ok': '',
   },
 
   isTest: {
