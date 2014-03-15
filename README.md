@@ -33,6 +33,11 @@ parser.getValidCount(); // => 2
 parser.getFailedCount(); // => 2
 
 parser.getTest(3).getDetails(); // => arbitrary number of (...) beginning of line.
+
+//loop on each test
+parser.tests.forEach( function( test ){
+  test.isValid();
+});
 ```
 
 ## Copyright 
