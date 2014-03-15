@@ -2,9 +2,10 @@
 
 A javascript tap file parser
 
-## Usage
+## Usage / Example
 
-get the content of your `test-result.tap` file
+for the following tap file `test-result.tap`
+
 ```tap
 1..4
 ok 1 - Input file opened
@@ -18,16 +19,18 @@ ok 3 - Read the rest of the file
 not ok 4 - Summarized correctly # TODO Not written yet
 ```
 
-then put it in the parser and get informations
+get the content of your tap file as a string
+then put it in the parser:
+
 ```js
 var parser = new tap.Parser( tapFileString );
 
-parser.getTest(1).isOk(); // => true
+parser.getTest(1).isValid(); // => true
 parser.getTest(2).getLabel(); // => First line of the input valid
 
-parser.getTotal(); // => 4
-parser.getValidTest(); // => 2
-parser.getFailedTest(); // => 2
+parser.getTestCount(); // => 4
+parser.getValidCount(); // => 2
+parser.getFailedCount(); // => 2
 
 parser.getTest(3).getDetails(); // => arbitrary number of (...) beginning of line.
 ```
