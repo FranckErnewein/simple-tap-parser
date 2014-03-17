@@ -40,6 +40,45 @@ parser.tests.forEach( function( test ){
 });
 ```
 
+## Install
+
+### NPM
+
+```
+npm install simple-tap-parser
+```
+
+### Bower
+
+```
+bower install simple-tap-parser
+```
+
+### RequireJS
+
+module is UMD compliant so you can load it with [RequireJS](http://requirejs.org/)
+
+```js
+define([
+  'path/to/tap-parser',
+  'text!my-tap-fil.tap'
+], function( tap, tapFile ){
+  
+  new parser = tap.Parser( tapFile );
+
+});
+```
+
+### Old school 
+
+```html
+<script src="path/to/tap.js"></script>
+<script>
+  new tap.Parser( tapString );
+</script>
+```
+
+
 ## Copyright 
 
 tap-parser is released under the GPL v2.
