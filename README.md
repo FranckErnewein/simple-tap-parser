@@ -64,7 +64,7 @@ define([
   'text!my-tap-fil.tap'
 ], function( tap, tapFile ){
   
-  new parser = tap.Parser( tapFile );
+  var parser = new tap.Parser( tapFile );
 
 });
 ```
