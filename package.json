@@ -1,5 +1,5 @@
 {
-  "name": "tap-parser",
+  "name": "simple-tap-parser",
   "version": "0.0.1",
   "description": "Javascript tap parser",
   "main": "tap.js",
