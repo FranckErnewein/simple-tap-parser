@@ -40,7 +40,7 @@ parser.tests.forEach( function( test ){
 });
 ```
 
-## Install
+## Install / Download
 
 ### NPM
 
