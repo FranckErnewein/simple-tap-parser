@@ -1,4 +1,4 @@
-# tap-parser
+# tap-parser [![Build Status](https://travis-ci.org/FranckErnewein/simple-tap-parser.svg?branch=master)](https://travis-ci.org/FranckErnewein/simple-tap-parser)
 
 A javascript tap file parser
 
